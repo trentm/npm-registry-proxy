@@ -1,0 +1,15 @@
+{
+  "name": "npm-registry-proxy",
+  "description": "a simple and *limited* proxy for registry.npmjs.org",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/trentm/npm-registry-proxy.git"
+  },
+  "author": "Trent Mick <trentm@gmail.com> (http://trentm.com)",
+  "bin": {
+    "npm-registry-proxy": "./proxy.js"
+  },
+  "engines": ["node >=0.6.0"],
+  "keywords": ["npm", "registry", "proxy"]
+}
