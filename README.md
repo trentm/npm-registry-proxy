@@ -14,6 +14,11 @@ or:
     npm install npm-registry-proxy
     ./node_modules/.bin/npm-registry-proxy
 
+
+Then you *should* be able to npm install via this thing:
+
+    npm --registry=http://localhost:8000/ install jsontool
+
 # License
 
 MIT.

@@ -1,6 +1,6 @@
 {
   "name": "npm-registry-proxy",
-  "description": "a simple and *limited* proxy for registry.npmjs.org",
+  "description": "a simple and *limited* proxy for registry.npmjs.org for testing npm",
   "version": "1.0.0",
   "repository": {
     "type": "git",
