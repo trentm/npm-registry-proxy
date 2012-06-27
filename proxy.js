@@ -31,7 +31,6 @@ var server = http.createServer(function(req, res) {
                 chunks.push(chunk);
             });
             pres.on('end', function () {
-                console.log('proxy req end');
                 var data = chunks.join('')
                 data = data.replace(/registry.npmjs.org/g, "localhost:8000")
                 res.write(data);
