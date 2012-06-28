@@ -16,8 +16,7 @@ var server = http.createServer(function(req, res) {
     }
 
     // TODO: Inject optional "server" failures here.
-    /*
-    */
+    /**/
     // - Fail twice for 'GET /$package'
     if (counters.a === undefined) counters.a = 0;
     if (req.url.split('/').length - 1 === 1 && counters.a < 2) {
@@ -26,8 +25,7 @@ var server = http.createServer(function(req, res) {
         res.end()
         counters.a++
     }
-    /*
-    */
+    /**/
     // - Fail once for 'GET /$package/-/$package-$version.tgz'
     if (counters.b === undefined) counters.b = 0;
     var packageRe = new RegExp('^/([^/]+)/-/\\1-[^/]+\.tgz$')
@@ -58,11 +56,14 @@ var server = http.createServer(function(req, res) {
             pres.on('end', function () {
                 var data = chunks.join('')
                 data = data.replace(/registry.npmjs.org/g, "localhost:8000")
+                // Server failure: make package request bogus (for bunyan@0.6.8).
+                //data = data.replace(/bunyan-0.6.8.tgz/g, "bunyan-0.6.8-BOGUS.tgz")
                 res.write(data);
                 res.end();
             });
         } else {
             pres.on('data', function (chunk) {
+                res.statusCode = pres.statusCode
                 res.write(chunk)
             });
             pres.on('end', function () {
