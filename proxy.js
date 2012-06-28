@@ -2,6 +2,8 @@
 
 var http = require('http')
 var log = console.log
+var counter = 0;
+
 
 var server = http.createServer(function(req, res) {
     log("proxy:", req.method, req.url)
@@ -12,6 +14,27 @@ var server = http.createServer(function(req, res) {
         res.end()
         return
     }
+
+    // TODO: Inject optional "server" failures here.
+    /*
+    // - Fail twice for 'GET /$package'
+    if (req.url.split('/').length - 1 === 1 && counter < 2) {
+        log('500 this request')
+        res.statusCode = 500
+        res.end()
+        counter++
+    }
+    */
+    /*
+    // - Fail once for 'GET /$package/-/$package-$version.tgz'
+    var packageRe = new RegExp('^/([^/]+)/-/\\1-[^/]+\.tgz$')
+    if (packageRe.test(req.url) && counter < 1) {
+        log('500 this request')
+        res.statusCode = 500
+        res.end()
+        counter++
+    }
+    */
 
     var options = {
         host: 'registry.npmjs.org',
