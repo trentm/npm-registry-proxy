@@ -2,7 +2,7 @@
 
 var http = require('http')
 var log = console.log
-var counter = 0;
+var counters = {};
 
 
 var server = http.createServer(function(req, res) {
@@ -17,24 +17,26 @@ var server = http.createServer(function(req, res) {
 
     // TODO: Inject optional "server" failures here.
     /*
+    */
     // - Fail twice for 'GET /$package'
-    if (req.url.split('/').length - 1 === 1 && counter < 2) {
+    if (counters.a === undefined) counters.a = 0;
+    if (req.url.split('/').length - 1 === 1 && counters.a < 2) {
         log('500 this request')
         res.statusCode = 500
         res.end()
-        counter++
+        counters.a++
     }
-    */
     /*
+    */
     // - Fail once for 'GET /$package/-/$package-$version.tgz'
+    if (counters.b === undefined) counters.b = 0;
     var packageRe = new RegExp('^/([^/]+)/-/\\1-[^/]+\.tgz$')
-    if (packageRe.test(req.url) && counter < 1) {
+    if (packageRe.test(req.url) && counters.b < 1) {
         log('500 this request')
         res.statusCode = 500
         res.end()
-        counter++
+        counters.b++
     }
-    */
 
     var options = {
         host: 'registry.npmjs.org',
